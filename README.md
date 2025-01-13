@@ -6,9 +6,9 @@ This repo is the backend of a mobile app project called My plant App. The concep
 
 This repo uses MongoDb for the database and Express.js and Node.js to run the database and server.
 
-## VIEW THE HOSTED BACKEND:
+## VIEW DEMO
+https://northcoders.com/project-phase/my-plants-app
 
-https://my-plants-be.onrender.com/api
 
 ## INSTRUCTIONS ON LOCAL USE
 
@@ -118,4 +118,4 @@ These include:
 - 409 error messages for when trying to create or update a resource that already exists or has conflicting information.
 - 500 error message should the instance occur that there is a system issue.
 
-### Acknowledgements
+
