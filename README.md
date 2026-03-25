@@ -1,121 +1,129 @@
-# my-plants-BE
+# My Plants — Backend API
 
-## About this repo
+A RESTful API for a plant care mobile app. Users can identify plants, build a personal collection, track watering schedules, and earn rewards for keeping their plants alive.
 
-This repo is the backend of a mobile app project called My plant App. The concept of the app is targetted at people who like to collect plants and know how to care for them.
+Built with **Node.js**, **Express**, and **MongoDB**.
 
-This repo uses MongoDb for the database and Express.js and Node.js to run the database and server.
+---
 
-## VIEW DEMO
-https://northcoders.com/project-phase/my-plants-app
+## 🔗 Links
 
+- **Demo:** [northcoders.com/project-phase/my-plants-app](https://northcoders.com/project-phase/my-plants-app)
+- **Frontend Repo:** [github.com/AOYousufi/my-plants-FE](https://github.com/AOYousufi/my-plants-FE)
 
-## INSTRUCTIONS ON LOCAL USE
+---
 
-- To clone this repo on your local machine use the following link:
+## 🛠 Tech Stack
 
-### HTTPS:
+| Layer | Technology |
+|---|---|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | MongoDB |
+| ODM | Mongoose |
+| Testing | Jest + Supertest |
 
-    git clone https://github.com/odonnellrory/my-plants-BE.git
+---
 
-### SSH:
+## 📡 API Endpoints
 
-    git clone git@github.com:odonnellrory/my-plants-BE.git
+### Auth & Users
 
-- To download the dependencies run the following command in the terminal:
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/register` | Register a new user |
+| POST | `/api/login` | Login with username & password |
+| GET | `/api/users/:username` | Get user profile |
+| PATCH | `/api/users/:username/rewards` | Update reward count |
 
-  npm install
+### Plants
 
-## RUNNING TESTS
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/users/:username/plants` | Get all plants for a user |
+| POST | `/api/users/:username/plants` | Add a plant to collection |
+| GET | `/api/users/:username/plants/:plant_id` | Get a specific plant |
+| PATCH | `/api/users/:username/plants/:plant_id` | Update plant nickname |
+| PATCH | `/api/users/:username/plants/:plant_id/water` | Log a watering event |
+| PATCH | `/api/users/:username/plants/:plant_id/dead` | Move plant to graveyard |
+| DELETE | `/api/users/:username/plants/:plant_id` | Delete a plant |
 
-To set up the databases on your local machine to allow for testing please do the following:
+### Graveyard
 
-- To test the files:
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/users/:username/plants_graveyard` | Get all deceased plants |
 
-  npm test [insert file name]
+---
 
-- The test suite on this repo is test.js you can run the tests by inputting the following command in the terminal:
+## ⚙️ Local Setup
 
-  npm test test.js
+### 1. Clone the repo
 
-## INFORMATION ON THE PROJECT
+```bash
+# HTTPS
+git clone https://github.com/odonnellrory/my-plants-BE.git
 
-Users can identify a plant via picture or search bar, add the plant to their plant list and load the specific care plan for that plant. They can also set up push notifications to remind them which plant needs watering/ feeding and when.
+# SSH
+git clone git@github.com:odonnellrory/my-plants-BE.git
 
-Here are the list of endpoints available in this repo and the information they can send to the user:
+cd my-plants-BE
+```
 
-### GET /api'
+### 2. Install dependencies
 
-- Returns information on all available endpoints and descriptions of how they should be interacted with.
+```bash
+npm install
+```
 
-### POST '/api/register'
+### 3. Create environment file
 
-The information they contain are:
+Create a `.env` file at the project root:
 
-- username
-- name
-- email
-- password
+```
+MONGODB_URI=your_mongodb_connection_string
+PORT=9090
+```
 
-- Registers them as a new user, stores their login information into the users database.
+> This file is gitignored — never commit it.
 
-### POST '/api/login'
+### 4. Run the server
 
-- username
-- password
+```bash
+npm start
+```
 
-- Users can sign in using their login information.
+---
 
-### GET '/api/users/:username'
+## 🧪 Testing
 
-- Returns a list of all the information of that user.
+Integration tests cover all endpoints and error cases using **Jest** and **Supertest**.
 
-### POST '/api/users/:username/plants'
+```bash
+# Run all tests
+npm test
 
-- Users can add a plant to a plant database which is stored in their user database.
+# Run a specific file
+npm test test.js
+```
 
-### GET '/api/users/:username/plants'
+### Error handling coverage
 
-- Returns a list of all the plants that have been added.
+| Code | Meaning |
+|---|---|
+| 400 | Invalid request / bad input |
+| 401 | Missing or invalid authentication |
+| 404 | Resource not found |
+| 409 | Conflict — resource already exists |
+| 500 | Internal server error |
 
-### GET '/api/users/:username/plants/:plant_id'
+---
 
-- Returns the list of information on that specific plant when given a valid plant_id.
+## Requirements
 
-### DELETE '/api/users/:username/plants/:plant_id'
+- Node.js `v18+`
+- MongoDB `v6+` (local or Atlas)
 
-- Users can delete a plant when given a valid plant_id.
+---
 
-### GET "/api/users/:username/plants_graveyard"
-
-- Returns a list of all the plants that have been added to the plant graveyard.
-
-### PATCH "/api/users/:username/plants/:plantId"
-
-- Users can change a plants nickname.
-
-### PATCH "/api/users/:username/plants/:plantId/water"
-
-- Users can update a plants information when the plant has been last watered.
-
-### PATCH "/api/users/:username/rewards"
-
-- Users can update their reward count by watering a plant.
-
-### PATCH "/api/users/:username/plants/:plantId/dead"
-
-- Users can add a plant to the graveyard when given a valid plant_id.
-
-## ERROR HANDLERS
-
-A number of error handlers have also been created and tested to successfully take into account the different errors that could occur from a client's request.
-
-These include:
-
-- 400 error messages for invalid requests.
-- 401 error messages for lacks valid authentication credentials.
-- 404 error messages both with generic and specific messages if the request cannot be found.
-- 409 error messages for when trying to create or update a resource that already exists or has conflicting information.
-- 500 error message should the instance occur that there is a system issue.
-
-
+*Built as a group project during the Northcoders Digital Skills Bootcamp in Software Engineering.*
